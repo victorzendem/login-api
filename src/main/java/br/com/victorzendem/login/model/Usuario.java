@@ -31,9 +31,11 @@ public class Usuario {
     @Column(name = "senha", nullable = false)
     private String senha;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private StatusUsuario status = StatusUsuario.ATIVO;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "perfil", nullable = false)
     private TipoUsuario tipoUsuario = TipoUsuario.ROLE_USER;
 
@@ -52,6 +54,25 @@ public class Usuario {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+    }
+
+    public void atualizarDados(String nome, String email){
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public void atualizarParcialmente(String nome, String email){
+        if(nome != null && !nome.isBlank()){
+            this.nome = nome;
+        }
+
+        if(email != null && !email.isBlank()){
+            this.email = email;
+        }
+    }
+
+    public void alterarSenha(String novaSenhaCriptografada){
+        this.senha = novaSenhaCriptografada;
     }
 
 
